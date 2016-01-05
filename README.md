@@ -10,7 +10,7 @@ First, start up rethinkdb:
 ```sh
 rethinkdb
 ```
-Create a table `tasks` using the RethinkDB dashboard at localhost:8080
+Create a `tasks` table in the `test` database using the RethinkDB dashboard at localhost:8080
 
 Then, in a separate terminal tab:
 ```sh
