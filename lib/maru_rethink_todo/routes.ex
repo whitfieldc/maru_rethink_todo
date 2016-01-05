@@ -59,23 +59,25 @@ defmodule MaruRethinkTodo.Router.Homepage do
         task = QueryWrapper.get_task_by_id(params[:task_id])
 
         json conn, task
-    #     task = MaruRethinkTodo.Task |> Database.get(params[:task_id])
-    #     json conn, task
       end
 
-    #   params do
-    #     optional :title,     type: String
-    #     optional :order,     type: Integer
-    #     optional :completed, type: Boolean
-    #     at_least_one_of [:title, :order, :completed]
-    #   end
-    #   patch do
-    #     # Next version of Maru will NOT keep nil params
-    #     changeset =
-    #       params |> Enum.filter(fn
-    #         {_, nil} -> false
-    #         _        -> true
-    #       end) |> Enum.into(%{})
+      params do
+        optional :title,     type: String
+        optional :order,     type: Integer
+        optional :completed, type: Boolean
+        at_least_one_of [:title, :order, :completed]
+      end
+      patch do
+        # Next version of Maru will NOT keep nil params
+        changeset =
+          params |> Enum.filter(fn
+            {_, nil} -> false
+            _        -> true
+          end) |> Enum.into(%{})
+
+        updated_task = QueryWrapper.update_task(params[:task_id], changeset)
+
+        json conn, updated_task
     #     task = MaruRethinkTodo.Task |> Database.get(params[:task_id])
     #     patch_changeset = Task.changeset(task, changeset)
 
@@ -87,9 +89,12 @@ defmodule MaruRethinkTodo.Router.Homepage do
     #         |> put_status(500)
     #         |> text("Update Failed")
     #     end
-    #   end
+      end
 
-    #   delete do
+      delete do
+        QueryWrapper.delete_task(params[:task_id])
+
+        json conn, %{deleted: params[:task_id]}
     #     dead_task = MaruRethinkTodo.Task |> Database.get(params[:task_id])
     #     case Database.delete(dead_task) do
     #       {:ok, task} ->
@@ -99,7 +104,7 @@ defmodule MaruRethinkTodo.Router.Homepage do
     #         |> put_status(500)
     #         |> text("Delete Failed")
     #     end
-    #   end
+      end
 
     end
   end

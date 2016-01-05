@@ -40,4 +40,29 @@ defmodule MaruRethinkTodo.QueryWrapper do
 
     hd(task.data)
   end
+
+  def update_task(id, changeset) do
+    updated_task = table("tasks")
+      |> get(id)
+      |> update(changeset, %{return_changes: true})
+      |> Database.run
+
+    hd(updated_task.data["changes"])["new_val"]
+  end
+
+  def delete_task(id) do
+    table("tasks")
+      |> get(id)
+      |> delete
+      |> Database.run
+      |> IO.inspect
+
+
+  end
+
+
+
+
 end
+
+# curl -H "Content-Type: application/json" -X DELETE http://localhost:8880/tasks | less
