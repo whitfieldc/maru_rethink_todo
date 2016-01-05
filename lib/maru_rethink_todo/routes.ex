@@ -13,12 +13,16 @@ defmodule MaruRethinkTodo.Router.Homepage do
       json conn, tasks
     end
 
-    # params do
-    #   requires :title,     type: String
-    #   optional :order,     type: Integer
-    #   optional :completed, type: Boolean, default: false
-    # end
-    # post do
+    params do
+      requires :title,     type: String
+      optional :order,     type: Integer
+      optional :completed, type: Boolean, default: false
+    end
+    post do
+        # IO.inspect(params)
+        task = QueryWrapper.create_task(params)
+
+        json conn, task
     #   changeset = Task.changeset(%Task{}, params)
     #   case Database.insert(changeset) do
     #     {:ok, task} ->
@@ -34,9 +38,11 @@ defmodule MaruRethinkTodo.Router.Homepage do
     #       |> put_status(400)
     #       |> text("Insert Failed")
     #   end
-    # end
+    end
 
-    # delete do
+    delete do
+        task = QueryWrapper.delete_all_tasks
+        json conn, []
     #   case Database.delete_all(Task) do
     #     {_number, nil} ->
     #       json conn, []
@@ -45,13 +51,17 @@ defmodule MaruRethinkTodo.Router.Homepage do
     #       |> put_status(500)
     #       |> text("Delete Failed")
     #   end
-    # end
+    end
 
-    # route_param :task_id do
-    #   get do
+    route_param :task_id do
+      get do
+
+        task = QueryWrapper.get_task_by_id(params[:task_id])
+
+        json conn, task
     #     task = MaruRethinkTodo.Task |> Database.get(params[:task_id])
     #     json conn, task
-    #   end
+      end
 
     #   params do
     #     optional :title,     type: String
@@ -91,6 +101,6 @@ defmodule MaruRethinkTodo.Router.Homepage do
     #     end
     #   end
 
-    # end
+    end
   end
 end
