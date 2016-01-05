@@ -14,8 +14,8 @@ Create a `tasks` table in the `test` database using the RethinkDB dashboard at l
 
 Then, in a separate terminal tab:
 ```sh
-git clone https://github.com/whitfieldc/maru_todo.git
-cd maru_todo
+git clone https://github.com/whitfieldc/maru_rethink_todo.git
+cd maru_rethink_todo
 mix deps.get
 iex -S mix
 ```
