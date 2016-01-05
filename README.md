@@ -1,6 +1,6 @@
 # MaruTodo
 
-To-do List JSON API built with [Maru framework](http://maru.readme.io)
+To-do List JSON API built with [Maru framework](http://maru.readme.io) and [hamiltop](github.com/hamiltop)'s [RethinkDB Elixir client](github.com/hamiltop/rethinkdb-elixir)
 
 Tested against [Todo-Backend](http://todobackend.com/) spec
 
