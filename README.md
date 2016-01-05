@@ -1,20 +1,27 @@
-# MaruRethinkTodo
+# MaruTodo
 
-**TODO: Add description**
+To-do List JSON API built with [Maru framework](http://maru.readme.io)
 
-## Installation
+Tested against [Todo-Backend](http://todobackend.com/) spec
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+#### To Run
 
-  1. Add maru_rethink_todo to your list of dependencies in `mix.exs`:
+First, start up rethinkdb:
+```sh
+rethinkdb
+```
+Create a table `tasks` using the RethinkDB dashboard at localhost:8080
 
-        def deps do
-          [{:maru_rethink_todo, "~> 0.0.1"}]
-        end
+Then, in a separate terminal tab:
+```sh
+git clone https://github.com/whitfieldc/maru_todo.git
+cd maru_todo
+mix deps.get
+iex -S mix
+```
+Test local version at [http://www.todobackend.com/specs/index.html?http://localhost:8880/tasks](http://www.todobackend.com/specs/index.html?http://localhost:8880/tasks)
 
-  2. Ensure maru_rethink_todo is started before your application:
-
-        def application do
-          [applications: [:maru_rethink_todo]]
-        end
-
+#### Requirements
+- Elixir 1.2
+- Hex
+- RethinkDB
