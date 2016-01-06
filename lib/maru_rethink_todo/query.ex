@@ -60,9 +60,4 @@ defmodule MaruRethinkTodo.QueryWrapper do
 
   end
 
-
-
-
 end
-
-# curl -H "Content-Type: application/json" -X DELETE http://localhost:8880/tasks | less
