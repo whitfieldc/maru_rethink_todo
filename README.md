@@ -19,7 +19,7 @@ cd maru_rethink_todo
 mix deps.get
 iex -S mix
 ```
-Test local version at [http://www.todobackend.com/specs/index.html?http://localhost:8880/tasks](http://www.todobackend.com/specs/index.html?http://localhost:8880/tasks)
+Test local version at: [http://www.todobackend.com/specs/index.html?http://localhost:8880/tasks](http://www.todobackend.com/specs/index.html?http://localhost:8880/tasks)
 
 #### Requirements
 - Elixir 1.2
