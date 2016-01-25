@@ -35,3 +35,7 @@ db:
 
 install: db app
 .PHONY: install
+
+clean:
+	@docker rm -vf maru_app maru_db
+.PHONY: clean
