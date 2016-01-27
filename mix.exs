@@ -11,15 +11,16 @@ defmodule MaruRethinkTodo.Mixfile do
   end
 
   def application do
-    [applications: (Mix.env == :dev && [:exsync] || []) ++ [:logger, :maru, :rethinkdb], mod: {MaruRethinkTodo, []}]
+    # [applications: (Mix.env == :dev && [:exsync] || []) ++ [:logger, :maru, :rethinkdb], mod: {MaruRethinkTodo, []}]
+    [applications: [:logger, :maru, :rethinkdb], mod: {MaruRethinkTodo, []}]
   end
 
   defp deps do
     [ {:maru, "~> 0.9"},
       {:cors_plug, "~> 0.1.4"},
       {:rethinkdb, "~> 0.2.0"},
-      {:exsync, "~> 0.1", only: :dev},
-      {:credo, "~> 0.2", only: [:dev, :test]}
+      # {:exsync, "~> 0.1", only: :dev},
+      # {:credo, "~> 0.2", only: [:dev, :test]}
     ]
   end
 end

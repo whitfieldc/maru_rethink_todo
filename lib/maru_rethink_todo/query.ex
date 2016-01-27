@@ -6,20 +6,19 @@ defmodule MaruRethinkTodo.QueryWrapper do
   import RethinkDB.Lambda
 
   def get_all_tasks do
-    tasks = table("tasks")
-      |> Database.run
+    tasks = table("tasks") |> Database.run
     tasks.data
   end
 
   def create_task(new_task) do
-    task = table("tasks")
-      |> insert(new_task, %{return_changes: true})
-      |> Database.run
+    task = table("tasks") |> insert(new_task, %{return_changes: true})
+                          |> Database.run
 
     task_id = hd(task.data["generated_keys"])
     url_included = table("tasks")
       |> get(task_id)
-      |> update(lambda(fn(task) -> %{url: "http://localhost:8880/tasks/#{task_id}"} end), %{return_changes: true})
+      |> update(lambda(fn (task) -> %{url: "/tasks/#{task_id}"} end),
+                %{return_changes: true})
       |> Database.run
 
     hd(url_included.data["changes"])["new_val"]
