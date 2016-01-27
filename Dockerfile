@@ -25,4 +25,4 @@ RUN mix local.hex --force \
  && mix deps.get
 
 EXPOSE 8880
-CMD ["iex", "-S", "mix"]
+CMD ["mix", "run", "--no-halt"]

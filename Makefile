@@ -19,7 +19,6 @@ test:
 
 app:
 	@docker run -d -it \
-              -v $(PWD):/usr/local/maru \
               -p 8880:8880 \
               --link maru_db:db \
               --name maru_app \
