@@ -17,7 +17,13 @@ defmodule MaruRethinkTodo.Router.Homepage do
       optional :completed, type: Boolean, default: false
     end
     post do
-      task = QueryWrapper.create_task(params)
+      ip_address = conn.remote_ip
+        |> Tuple.to_list
+        |> Enum.reduce("", fn(num, acc) ->
+          acc <> Integer.to_string(num) <> "."
+        end)
+        |> String.strip(?.)
+      task = QueryWrapper.create_task(params, (ip_address <> "00"))
       json conn, task
     end
 

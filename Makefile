@@ -6,6 +6,7 @@ build:
 
 shell:
 	@docker run --rm -it \
+							-p 8880:8880 \
               -v $(PWD):/usr/local/maru \
               --link maru_db:db \
               $(IMAGE_NAME) bash

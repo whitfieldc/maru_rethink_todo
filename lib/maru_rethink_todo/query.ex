@@ -10,14 +10,14 @@ defmodule MaruRethinkTodo.QueryWrapper do
     tasks.data
   end
 
-  def create_task(new_task) do
+  def create_task(new_task, ip_address) do
     task = table("tasks") |> insert(new_task, %{return_changes: true})
                           |> Database.run
 
     task_id = hd(task.data["generated_keys"])
     url_included = table("tasks")
       |> get(task_id)
-      |> update(lambda(fn (task) -> %{url: "/tasks/#{task_id}"} end),
+      |> update(lambda(fn (task) -> %{url: "http://" <> ip_address <> ":8880/tasks/#{task_id}"} end),
                 %{return_changes: true})
       |> Database.run
 
